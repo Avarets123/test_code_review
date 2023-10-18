@@ -24,6 +24,11 @@ const repositoryService = new RepositoryService({
   databaseService,
 });
 
+export const userService = new UserService({
+  repositoryService,
+  emailService,
+});
+
 const app = new Koa();
 
 app.use(bodyParser({
@@ -32,16 +37,17 @@ app.use(bodyParser({
   },
 }));
 app.use(async (ctx, next) => {
-  ctx.userService = new UserService({
-    repositoryService,
-    emailService,
-  });
+  ctx.userService = userService;
 
   return next();
 });
 app.use(PutUsersController);
+// app.use(PutUsersControllerExample(userService));
 
-export const httpServer = app.listen(process.env.PORT || '4000');
+const PORT = process.env.PORT || '4000';
+
+export const httpServer = app.listen(PORT);
+console.log('App has been started on port: ' + PORT);
 httpServer.on('close', async () => {
   await pool.end();
 });

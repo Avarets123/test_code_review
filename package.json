@@ -5,7 +5,8 @@
   "scripts": {
     "test": "env-cmd jest",
     "lint": "eslint --fix",
-    "start": "env-cmd node src/index.js"
+    "start": "env-cmd node src/index.js",
+    "dev": "env-cmd nodemon src/index.js"
   },
   "license": "ISC",
   "dependencies": {
@@ -25,6 +26,7 @@
     "eslint-plugin-n": "^15.6.0",
     "eslint-plugin-promise": "^6.1.1",
     "jest": "^29.3.1",
+    "nodemon": "^3.0.1",
     "supertest": "^6.3.2"
   }
 }
